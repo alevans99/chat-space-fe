@@ -1,20 +1,17 @@
 <template>
   <v-app>
     <v-main :style="mainStyle">
-      <MenuPage />
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import MenuPage from './components/Pages/Menu/MenuPage.vue'
 import backgroundImage from './assets/background-image.jpg'
 export default {
   name: 'App',
 
-  components: {
-    MenuPage,
-  },
+  components: {},
 
   data: () => ({
     mainStyle: {
