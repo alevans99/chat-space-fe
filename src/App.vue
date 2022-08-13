@@ -26,7 +26,6 @@ export default {
       backgroundSize: 'cover',
       backgroundAttachment: 'fixed',
       backgroundPosition: 'center',
-      z: -2,
     },
   }),
 }

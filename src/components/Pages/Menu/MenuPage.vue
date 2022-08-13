@@ -1,54 +1,113 @@
 <template>
-  <v-container id="menu-page">
+  <v-container>
     <h1 class="menu-title white--text ma-10">Find Your Chat Space</h1>
-    <div
-      class="
-        menu-items-container
-        d-flex
-        flex-column flex-nowrap
-        align-center
-        mt-16
-        justify-space-between
-      "
-    >
-      <v-text-field
-        label="Enter Name"
-        class="white menu-item font-weight-light pa-0 ma-10"
-        placeholder="Choose a name to display"
-        single-line
-        rounded
-        hide-details="auto"
-        height="80px"
-      ></v-text-field>
+    <div id="menu-container">
       <div
         class="
-          menu-buttons-container
+          menu-items-container
           d-flex
           flex-column flex-nowrap
           align-center
+          mt-6 mt-md-10 mt-lg-16
+          justify-space-between
         "
       >
-        <v-btn
-          class="menu-item menu-button font-weight-light ma-5"
+        <v-text-field
+          label="Your Name"
+          class="white menu-item font-weight-light pa-0 ma-4 ma-md-6 ma-lg-10"
+          placeholder="Choose a name to display"
+          single-line
           rounded
-          color="black"
-          dark
-          height="70px"
-        >
-          Create New Space
-        </v-btn>
-        <v-btn
-          class="menu-item menu-button font-weight-light ma-5"
-          rounded
-          color="black"
-          dark
-          height="70px"
-        >
-          Join Existing Space
-        </v-btn>
+          hide-details="auto"
+          :height="menuItemHeight"
+          v-model="userNameInput"
+        ></v-text-field>
       </div>
+      <v-scroll-y-reverse-transition hide-on-leave>
+        <div
+          class="
+            menu-items-container
+            d-flex
+            flex-column flex-nowrap
+            align-center
+            mt-6 mt-md-10 mt-lg-16
+            justify-space-between
+          "
+          v-if="!showSpaceName"
+        >
+          <div
+            class="
+              menu-buttons-container
+              d-flex
+              flex-column flex-nowrap
+              align-center
+            "
+          >
+            <v-btn
+              class="menu-item menu-button font-weight-light ma-2 ma-md-5"
+              rounded
+              color="black"
+              dark
+              :height="menuItemHeight"
+            >
+              Create New Space
+            </v-btn>
+            <v-btn
+              class="menu-item menu-button font-weight-light ma-2 ma-md-5"
+              rounded
+              color="black"
+              dark
+              :height="menuItemHeight"
+              @click="showSpaceName = true"
+            >
+              Join Existing Space
+            </v-btn>
+          </div>
+        </div>
+      </v-scroll-y-reverse-transition>
+      <v-scroll-y-reverse-transition hide-on-leave>
+        <div
+          class="
+            menu-items-container
+            d-flex
+            flex-column flex-nowrap
+            align-center
+            justify-space-between
+          "
+          v-if="showSpaceName"
+        >
+          <v-text-field
+            label="Existing Space Name"
+            class="white menu-item font-weight-light pa-0 mb-6 mb-md-10"
+            placeholder=""
+            single-line
+            rounded
+            hide-details="auto"
+            :height="menuItemHeight"
+            v-model="spaceNameInput"
+          ></v-text-field>
+          <v-btn
+            class="menu-item menu-button font-weight-light ma-2 ma-md-5"
+            rounded
+            color="black"
+            dark
+            :height="menuItemHeight"
+          >
+            Join
+          </v-btn>
+          <v-btn
+            class="menu-item menu-button font-weight-light ma-2 ma-md-5"
+            rounded
+            color="black"
+            dark
+            :height="menuItemHeight"
+            @click="showSpaceName = false"
+          >
+            Back
+          </v-btn>
+        </div>
+      </v-scroll-y-reverse-transition>
     </div>
-
     <!-- Attribution Links -->
     <div class="attribution">
       <div
@@ -75,14 +134,36 @@
 export default {
   name: 'menu-page',
 
-  data: () => ({}),
+  data: () => ({
+    userNameInput: '',
+    spaceNameInput: '',
+    showSpaceName: false,
+  }),
+  computed: {
+    menuItemHeight() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          return '50px'
+        case 'sm':
+          return '60px'
+        case 'md':
+          return '70px'
+        case 'lg':
+          return '70px'
+        case 'xl':
+          return '70px'
+        default:
+          return '50px'
+      }
+    },
+  },
 }
 </script>
 <style scoped>
-#menu-page {
-  z-index: 2;
+#menu-container {
+  z-index: 2 !important;
 }
-::v-deep.menu-title {
+:deep(.menu-title) {
   font-family: 'ABeeZee', sans-serif;
   font-size: 8vw;
   text-align: center;
@@ -94,9 +175,29 @@ export default {
   text-transform: unset !important;
   font-size: 1.6rem;
 }
-::v-deep label {
+:deep(label) {
   font-size: 1.6rem !important;
+  display: flex;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  justify-content: center;
+  align-items: center;
+  max-width: 100% !important;
 }
+:deep(input) {
+  font-size: 1.6rem !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  text-align: center;
+}
+
+:deep(.v-input__slot) {
+}
+
 .menu-button {
   border: 1px white solid !important;
 }
@@ -106,9 +207,58 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 0 !important;
+  line-height: 0.5;
 }
 .attribution-links .attribution-link {
   color: rgba(255, 255, 255, 0.615);
   text-decoration: none;
+  z-index: 0 !important;
+}
+
+@media only screen and (max-width: 1080px) {
+  :deep(.menu-title) {
+    font-size: 8vw;
+  }
+  .menu-item {
+    width: 400px;
+    font-size: 1.2rem;
+  }
+
+  :deep(label),
+  :deep(input) {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  :deep(.menu-title) {
+    font-size: 8vw;
+  }
+  .menu-item {
+    width: 320px;
+    font-size: 1.1rem;
+  }
+  :deep(label),
+  :deep(input) {
+    font-size: 1.1rem !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  :deep(.menu-title) {
+    font-size: 14vw;
+  }
+  .menu-item {
+    width: 300px;
+    font-size: 1rem;
+  }
+  :deep(label),
+  :deep(input) {
+    font-size: 1rem !important;
+  }
+  .attribution {
+    font-size: 0.6rem;
+  }
 }
 </style>
