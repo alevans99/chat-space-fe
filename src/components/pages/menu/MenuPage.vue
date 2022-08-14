@@ -49,6 +49,7 @@
               color="black"
               dark
               :height="menuItemHeight"
+              :disabled="userNameInput === ''"
             >
               Create New Space
             </v-btn>
@@ -58,6 +59,7 @@
               color="black"
               dark
               :height="menuItemHeight"
+              :disabled="userNameInput === ''"
               @click="showSpaceName = true"
             >
               Join Existing Space
@@ -92,6 +94,7 @@
             color="black"
             dark
             :height="menuItemHeight"
+            :disabled="userNameInput === '' || spaceNameInput === ''"
           >
             Join
           </v-btn>
