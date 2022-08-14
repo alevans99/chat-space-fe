@@ -1,24 +1,19 @@
 <template >
-  <v-container class="fill-height py-0">
-    <v-row class="fill-height">
-      <v-col
-        cols="12"
-        class="
-          fill-height
-          user-list-container
-          d-flex
-          flex-column flex-nowrap
-          align-center
-          pt-12
-        "
-      >
-        <h2 class="text-h2 white--text py-12">Users Online</h2>
+  <v-container class="fill-height pa-0">
+    <v-row class="fill-height" no-gutters>
+      <v-col class="fill-height user-list-container pa-0" cols="12">
         <div
-          v-for="(user, i) in users"
-          :key="`User-${user}${i}`"
-          class="user-container pb-6"
+          cols="12"
+          class="d-flex flex-column flex-nowrap align-center pt-12"
         >
-          <h4 class="text-h4 white--text">{{ user }}</h4>
+          <h2 class="text-h2 white--text py-12">Users Online</h2>
+          <div
+            v-for="(user, i) in users"
+            :key="`User-${user}${i}`"
+            class="user-container pb-6"
+          >
+            <h4 class="text-h4 white--text">{{ user }}</h4>
+          </div>
         </div>
       </v-col>
     </v-row>
