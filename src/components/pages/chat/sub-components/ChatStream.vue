@@ -1,7 +1,8 @@
 <template >
   <div
     class="d-flex flex-column all-messages-container pa-10"
-    style="height: 96%; overflow-y: scroll"
+    style="height: 96%; overflow-y: scroll; width: 100%"
+    ref="messagesContainer"
   >
     <div
       :class="`single-message-container white my-4 pa-4 align-self-${messageAlignment(
@@ -11,69 +12,37 @@
       v-for="(message, i) in messages"
       :key="`Message${i}${message.timestamp}`"
     >
-      <h5 class="text-h5">{{ message.text }}</h5>
+      <h5 class="text-h5" style="word-break: break-word">{{ message.text }}</h5>
       <p class="text-subtitle-1">{{ message.sender }}</p>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'chat-stream',
 
-  data: () => ({
-    currentUser: 'userName',
-    messages: [
-      { text: 'This is a test', sender: 'userName', timestamp: '' },
-      {
-        text: 'This is the second message',
-        sender: 'otherUserName',
-        timestamp: '',
-      },
-      { text: 'This is a test', sender: 'userName', timestamp: '' },
-
-      {
-        text: 'This is the second message',
-        sender: 'otherUserName',
-        timestamp: '',
-      },
-      {
-        text: 'This is the second message This is the second message This is the second messageThis is the second messageThis is the second messageThis is the second messageThis is the second messageThis is the second messageThis is the second messageThis is the second messageThis is the second messageThis is the second message',
-        sender: 'otherUserName',
-        timestamp: '',
-      },
-      {
-        text: 'This is the second message',
-        sender: 'otherUserName',
-        timestamp: '',
-      },
-      { text: 'This is a test', sender: 'userName', timestamp: '' },
-
-      { text: 'This is a test', sender: 'userName', timestamp: '' },
-
-      {
-        text: 'This is the second message',
-        sender: 'otherUserName',
-        timestamp: '',
-      },
-      { text: 'This is a test', sender: 'userName', timestamp: '' },
-
-      {
-        text: 'This is the second message',
-        sender: 'otherUserName',
-        timestamp: '',
-      },
-      {
-        text: 'This is the second message',
-        sender: 'otherUserName',
-        timestamp: '',
-      },
-    ],
-  }),
-  computed: {},
+  data: () => ({}),
+  computed: {
+    ...mapState(['messages', 'socketId']),
+  },
+  watch: {
+    messages(newMessages) {
+      this.$nextTick(() => {
+        this.scrollToEnd()
+      })
+    },
+  },
   methods: {
     messageAlignment(messageSender) {
-      return messageSender === this.currentUser ? 'end' : 'start'
+      return messageSender === this.socketId ? 'end' : 'start'
+    },
+
+    scrollToEnd() {
+      const messages = this.$refs.messagesContainer
+
+      messages.scrollTop = 10000000
     },
   },
 }

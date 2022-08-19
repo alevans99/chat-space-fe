@@ -20,7 +20,7 @@
           rounded
           hide-details="auto"
           :height="menuItemHeight"
-          v-model="userNameInput"
+          v-model="usernameInput"
         ></v-text-field>
       </div>
       <v-scroll-y-reverse-transition hide-on-leave>
@@ -49,7 +49,8 @@
               color="black"
               dark
               :height="menuItemHeight"
-              :disabled="userNameInput === ''"
+              :disabled="usernameInput === ''"
+              @click="handleCreateRoom"
             >
               Create New Space
             </v-btn>
@@ -59,7 +60,7 @@
               color="black"
               dark
               :height="menuItemHeight"
-              :disabled="userNameInput === ''"
+              :disabled="usernameInput === ''"
               @click="showSpaceName = true"
             >
               Join Existing Space
@@ -94,7 +95,7 @@
             color="black"
             dark
             :height="menuItemHeight"
-            :disabled="userNameInput === '' || spaceNameInput === ''"
+            :disabled="usernameInput === '' || spaceNameInput === ''"
           >
             Join
           </v-btn>
@@ -134,15 +135,18 @@
 </template>
 
 <script>
+import { createNewRoom } from '../../../api/api'
+import { mapActions, mapState } from 'vuex'
+import router from '@/router'
 export default {
   name: 'menu-page',
 
   data: () => ({
-    userNameInput: '',
     spaceNameInput: '',
     showSpaceName: false,
   }),
   computed: {
+    ...mapState(['socketId', 'username', 'clientId']),
     menuItemHeight() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
@@ -158,6 +162,23 @@ export default {
         default:
           return '50px'
       }
+    },
+    usernameInput: {
+      get() {
+        return this.username
+      },
+      set(value) {
+        this.updateUsername({ username: value })
+      },
+    },
+  },
+  methods: {
+    ...mapActions(['updateRoom', 'updateUsername']),
+    async handleCreateRoom() {
+      const room = await createNewRoom(this.username, this.clientId)
+      this.updateRoom({ room })
+      console.log(room)
+      router.push({ name: 'chat', params: { room } })
     },
   },
 }
