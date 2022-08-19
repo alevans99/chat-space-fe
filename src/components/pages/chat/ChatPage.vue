@@ -19,12 +19,30 @@
 import UserList from './sub-components/UserList.vue'
 import ChatStream from './sub-components/ChatStream.vue'
 import MessageInput from './sub-components/MessageInput.vue'
+import { mapState } from 'vuex'
+import router from '@/router'
 
 export default {
   name: 'chat-page',
   components: { UserList, ChatStream, MessageInput },
   data: () => ({}),
-  computed: {},
+  computed: {
+    ...mapState(['clientId', 'username', 'room']),
+  },
+  created() {
+    if (
+      this.clientId === null ||
+      this.username === null ||
+      this.username === null
+    ) {
+      router.push({ name: 'menu' })
+    }
+    this.$socket.emit('join-space', {
+      clientId: this.clientId,
+      room: this.room,
+      username: this.username,
+    })
+  },
 }
 </script>
 <style scoped>

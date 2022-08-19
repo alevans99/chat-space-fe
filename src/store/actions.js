@@ -11,4 +11,7 @@ export default {
   updateUsername({ commit }, payload) {
     commit('updateUsername', payload)
   },
+  setCurrentUsers({ commit }, payload) {
+    commit('setCurrentUsers', payload)
+  },
 }

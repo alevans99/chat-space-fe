@@ -12,4 +12,7 @@ export default {
   updateUsername(state, payload) {
     state.username = payload.username
   },
+  setCurrentUsers(state, payload) {
+    state.currentUsers = payload.currentUsers
+  },
 }

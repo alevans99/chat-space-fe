@@ -16,8 +16,11 @@ export default {
 
   components: {},
   created() {
-    this.$socket.on('connected', () => {
+    this.$socket.on('connected', (client) => {
       this.setSocketConnected({ socketConnected: true, id: this.$socket.id })
+    })
+    this.$socket.on('join-space', ({ currentUsers }) => {
+      this.setCurrentUsers({ currentUsers })
     })
   },
   data: () => ({
@@ -33,7 +36,7 @@ export default {
     },
   }),
   methods: {
-    ...mapActions(['setSocketConnected']),
+    ...mapActions(['setSocketConnected', 'setCurrentUsers']),
   },
 }
 </script>

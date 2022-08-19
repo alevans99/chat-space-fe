@@ -8,7 +8,7 @@
         >
           <h2 class="text-h2 white--text py-12">Users Online</h2>
           <div
-            v-for="(user, i) in users"
+            v-for="(user, i) in currentUsers"
             :key="`User-${user}${i}`"
             class="user-container pb-6"
           >
@@ -21,13 +21,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'user-list',
 
-  data: () => ({
-    users: ['Thisisamuchlongername', 'User B'],
-  }),
-  computed: {},
+  data: () => ({}),
+  computed: {
+    ...mapState(['currentUsers']),
+  },
 }
 </script>
 <style scoped>

@@ -4,4 +4,5 @@ export default {
   room: null,
   clientId: null,
   messages: [],
+  currentUsers: [],
 }
