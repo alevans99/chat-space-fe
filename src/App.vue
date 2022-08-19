@@ -10,11 +10,16 @@
 
 <script>
 import backgroundImage from './assets/background-image.jpg'
+import { mapActions } from 'vuex'
 export default {
   name: 'App',
 
   components: {},
-
+  created() {
+    this.$socket.on('connected', () => {
+      this.setSocketConnected({ socketConnected: true, id: this.$socket.id })
+    })
+  },
   data: () => ({
     mainStyle: {
       backgroundImage: `linear-gradient(
@@ -27,6 +32,9 @@ export default {
       backgroundPosition: 'center',
     },
   }),
+  methods: {
+    ...mapActions(['setSocketConnected']),
+  },
 }
 </script>
 <style>
