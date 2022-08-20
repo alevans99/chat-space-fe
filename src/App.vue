@@ -10,7 +10,7 @@
 
 <script>
 import backgroundImage from './assets/background-image.jpg'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'App',
 
@@ -21,6 +21,9 @@ export default {
     })
     this.$socket.on('join-space', ({ currentUsers }) => {
       this.setCurrentUsers({ currentUsers })
+    })
+    this.$socket.on('message', (message) => {
+      this.addMessage({ message })
     })
   },
   data: () => ({
@@ -35,8 +38,11 @@ export default {
       backgroundPosition: 'center',
     },
   }),
+  computed: {
+    ...mapState(['messages']),
+  },
   methods: {
-    ...mapActions(['setSocketConnected', 'setCurrentUsers']),
+    ...mapActions(['setSocketConnected', 'setCurrentUsers', 'addMessage']),
   },
 }
 </script>

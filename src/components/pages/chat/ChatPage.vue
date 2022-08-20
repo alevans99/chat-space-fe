@@ -4,10 +4,16 @@
       <v-col cols="3" class="pa-0 ma-0"> <UserList /> </v-col>
 
       <v-col cols="9" class="pa-0 ma-0">
-        <div class="d-flex align-center" style="width: 100%; height: 85vh">
+        <div
+          class="d-flex align-center justify-center"
+          style="width: 100%; height: 85vh"
+        >
           <ChatStream />
         </div>
-        <div class="" style="width: 100%; height: 14vh">
+        <div
+          class="d-flex align-center justify-center"
+          style="width: 100%; height: 14vh"
+        >
           <MessageInput />
         </div>
       </v-col>

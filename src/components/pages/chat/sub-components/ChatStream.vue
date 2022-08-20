@@ -1,19 +1,26 @@
 <template >
   <div
     class="d-flex flex-column all-messages-container pa-10"
-    style="height: 96%; overflow-y: scroll; width: 100%"
+    style="height: 96%; overflow-y: scroll; width: 80%"
     ref="messagesContainer"
   >
     <div
       :class="`single-message-container white my-4 pa-4 align-self-${messageAlignment(
-        message.sender
+        message.senderId
       )}`"
-      style="max-width: 50%"
+      style="max-width: 50%; min-width: 30%"
       v-for="(message, i) in messages"
-      :key="`Message${i}${message.timestamp}`"
+      :key="`Message${i}${message.timestamp}${message.clientId}`"
     >
-      <h5 class="text-h5" style="word-break: break-word">{{ message.text }}</h5>
-      <p class="text-subtitle-1">{{ message.sender }}</p>
+      <h5
+        :class="`text-h5 text-${messageAlignment(message.senderId)}`"
+        style="word-break: break-word"
+      >
+        {{ message.text }}
+      </h5>
+      <p :class="`text-subtitle-1 text-${messageAlignment(message.senderId)}`">
+        {{ message.senderName }}
+      </p>
     </div>
   </div>
 </template>
@@ -25,7 +32,7 @@ export default {
 
   data: () => ({}),
   computed: {
-    ...mapState(['messages', 'socketId']),
+    ...mapState(['messages', 'clientId']),
   },
   watch: {
     messages(newMessages) {
@@ -35,10 +42,9 @@ export default {
     },
   },
   methods: {
-    messageAlignment(messageSender) {
-      return messageSender === this.socketId ? 'end' : 'start'
+    messageAlignment(senderId) {
+      return senderId === this.clientId ? 'end' : 'start'
     },
-
     scrollToEnd() {
       const messages = this.$refs.messagesContainer
 
