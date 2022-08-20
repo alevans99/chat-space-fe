@@ -96,6 +96,7 @@
             dark
             :height="menuItemHeight"
             :disabled="usernameInput === '' || spaceNameInput === ''"
+            @click="handleJoinExistingRoom"
           >
             Join
           </v-btn>
@@ -135,7 +136,7 @@
 </template>
 
 <script>
-import { createNewRoom } from '../../../api/api'
+import { createNewRoom, checkRoomStatus } from '../../../api/api'
 import { mapActions, mapState } from 'vuex'
 import router from '@/router'
 export default {
@@ -177,8 +178,15 @@ export default {
     async handleCreateRoom() {
       const room = await createNewRoom(this.username, this.clientId)
       this.updateRoom({ room })
-      console.log(room)
       router.push({ name: 'chat', params: { room } })
+    },
+    async handleJoinExistingRoom() {
+      const room = this.spaceNameInput
+      const roomStatus = await checkRoomStatus(room)
+      if (roomStatus) {
+        this.updateRoom({ room })
+        router.push({ name: 'chat', params: { room } })
+      }
     },
   },
 }
