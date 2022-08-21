@@ -15,4 +15,13 @@ export default {
   setCurrentUsers(state, payload) {
     state.currentUsers = payload.currentUsers
   },
+  removeUserFromRoom(state, payload) {
+    const userIndex = state.currentUsers.findIndex((currentUser) => {
+      return currentUser.clientId === payload.clientId
+    })
+    if (userIndex !== -1) {
+      state.currentUsers.splice(userIndex, 1)
+    }
+  },
+
 }

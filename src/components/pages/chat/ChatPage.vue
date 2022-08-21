@@ -49,6 +49,12 @@ export default {
       username: this.username,
     })
   },
+  beforeDestroy() {
+    this.$socket.emit('leave-space', {
+      room: this.room,
+      username: this.username,
+    })
+  },
 }
 </script>
 <style scoped>

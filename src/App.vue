@@ -19,11 +19,14 @@ export default {
     this.$socket.on('connected', (client) => {
       this.setSocketConnected({ socketConnected: true, id: this.$socket.id })
     })
-    this.$socket.on('join-space', ({ currentUsers }) => {
-      this.setCurrentUsers({ currentUsers })
+    this.$socket.on('join-space', ({ newUser, currentUsers }) => {
+      this.setCurrentUsers({ newUser, currentUsers })
     })
     this.$socket.on('message', (message) => {
       this.addMessage({ message })
+    })
+    this.$socket.on('leave-space', ({ clientId }) => {
+      this.removeUserFromRoom({ clientId })
     })
   },
   data: () => ({
@@ -42,7 +45,12 @@ export default {
     ...mapState(['messages']),
   },
   methods: {
-    ...mapActions(['setSocketConnected', 'setCurrentUsers', 'addMessage']),
+    ...mapActions([
+      'setSocketConnected',
+      'setCurrentUsers',
+      'addMessage',
+      'removeUserFromRoom',
+    ]),
   },
 }
 </script>

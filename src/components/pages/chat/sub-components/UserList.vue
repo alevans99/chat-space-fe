@@ -12,7 +12,7 @@
             :key="`User-${user}${i}`"
             class="user-container pb-6"
           >
-            <h4 class="text-h4 white--text">{{ user }}</h4>
+            <h4 class="text-h4 white--text">{{ user.username }}</h4>
           </div>
         </div>
       </v-col>

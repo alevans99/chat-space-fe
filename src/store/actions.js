@@ -14,4 +14,8 @@ export default {
   setCurrentUsers({ commit }, payload) {
     commit('setCurrentUsers', payload)
   },
+  removeUserFromRoom({ commit }, payload) {
+    commit('removeUserFromRoom', payload)
+  },
+
 }
