@@ -4,32 +4,26 @@
     style="height: 96%; overflow-y: scroll; width: 80%"
     ref="messagesContainer"
   >
-    <div
-      :class="`single-message-container white my-4 pa-4 align-self-${messageAlignment(
-        message.senderId
-      )}`"
-      style="max-width: 50%; min-width: 30%"
+    <component
       v-for="(message, i) in messages"
-      :key="`Message${i}${message.timestamp}${message.clientId}`"
-    >
-      <h5
-        :class="`text-h5 text-${messageAlignment(message.senderId)}`"
-        style="word-break: break-word"
-      >
-        {{ message.text }}
-      </h5>
-      <p :class="`text-subtitle-1 text-${messageAlignment(message.senderId)}`">
-        {{ message.senderName }}
-      </p>
-    </div>
+      :key="`message${i}${message.senderId}`"
+      :is="getComponenetType(message)"
+      :messageObject="message"
+    ></component>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import SingleMessage from './SingleMessage.vue'
+import AlertMessage from './AlertMessage.vue'
+
 export default {
   name: 'chat-stream',
-
+  components: {
+    SingleMessage,
+    AlertMessage,
+  },
   data: () => ({}),
   computed: {
     ...mapState(['messages', 'clientId']),
@@ -42,8 +36,8 @@ export default {
     },
   },
   methods: {
-    messageAlignment(senderId) {
-      return senderId === this.clientId ? 'end' : 'start'
+    getComponenetType(message) {
+      return message.alert ? AlertMessage : SingleMessage
     },
     scrollToEnd() {
       const messages = this.$refs.messagesContainer
@@ -54,10 +48,6 @@ export default {
 }
 </script>
 <style scoped>
-.single-message-container {
-  border-radius: 16px;
-}
-
 .all-messages-container::-webkit-scrollbar {
   width: 12px;
 }
