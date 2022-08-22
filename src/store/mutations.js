@@ -39,5 +39,8 @@ export default {
       state.currentUsers.splice(userIndex, 1)
     }
   },
+  clearMessages(state) {
+    state.messages = []
+  },
 
 }

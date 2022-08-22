@@ -17,5 +17,8 @@ export default {
   removeUserFromRoom({ commit }, payload) {
     commit('removeUserFromRoom', payload)
   },
+  clearMessages({ commit }) {
+    commit('clearMessages')
+  },
 
 }
