@@ -42,5 +42,8 @@ export default {
   clearMessages(state) {
     state.messages = []
   },
+  updateMobileUserList(state, payload) {
+    state.mobileUserList = payload.mobileUserList
+  },
 
 }

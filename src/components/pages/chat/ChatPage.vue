@@ -12,17 +12,39 @@
       >
         <div
           style="cursor: pointer"
-          class="d-flex justify-end align-center"
-          @mouseover="copyIconColor = 'yellow'"
-          @mouseleave="copyIconColor = 'white'"
-          @click="copyRoomLink"
+          class="
+            d-flex
+            justify-space-between justify-md-end
+            align-center
+            px-1 px-md-0
+          "
         >
-          <h4 :class="`text-subtitle-1 text-md-h4 ${copyIconColor}--text ma-2`">
-            {{ room }}
-          </h4>
-          <v-icon :color="copyIconColor" v-bind="iconSize"
-            >mdi-content-copy</v-icon
+          <v-btn
+            fab
+            outlined
+            color="white"
+            @click="updateMobileUserList({ mobileUserList: true })"
+            class="d-md-none"
           >
+            <v-icon color="white" v-bind="iconSize"
+              >mdi-account-multiple</v-icon
+            >
+          </v-btn>
+          <div
+            class="d-flex justify-end"
+            @mouseover="copyIconColor = 'yellow'"
+            @mouseleave="copyIconColor = 'white'"
+            @click="copyRoomLink"
+          >
+            <h4
+              :class="`text-subtitle-1 text-md-h4 ${copyIconColor}--text ma-2`"
+            >
+              {{ room }}
+            </h4>
+            <v-icon :color="copyIconColor" v-bind="iconSize"
+              >mdi-content-copy</v-icon
+            >
+          </div>
           <v-snackbar v-model="copySnackbar" timeout="1000" top right>
             Link Copied
           </v-snackbar>
@@ -38,11 +60,14 @@
         </div>
       </v-col>
     </v-row>
+    <UserListDialog />
   </v-container>
 </template>
 
 <script>
 import UserList from './sub-components/UserList.vue'
+import UserListDialog from './sub-components/UserListDialog.vue'
+
 import ChatStream from './sub-components/ChatStream.vue'
 import MessageInput from './sub-components/MessageInput.vue'
 import { mapActions, mapState } from 'vuex'
@@ -50,7 +75,7 @@ import router from '@/router'
 
 export default {
   name: 'chat-page',
-  components: { UserList, ChatStream, MessageInput },
+  components: { UserList, ChatStream, MessageInput, UserListDialog },
   data: () => ({ copyIconColor: 'white', copySnackbar: false }),
   computed: {
     ...mapState(['clientId', 'username', 'room']),
@@ -90,7 +115,7 @@ export default {
     this.clearMessages()
   },
   methods: {
-    ...mapActions(['clearMessages']),
+    ...mapActions(['clearMessages', 'updateMobileUserList']),
     async copyRoomLink() {
       try {
         await navigator.clipboard.writeText(this.room)

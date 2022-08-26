@@ -5,4 +5,5 @@ export default {
   clientId: null,
   messages: [],
   currentUsers: [],
+  mobileUserList: true,
 }

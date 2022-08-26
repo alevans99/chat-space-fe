@@ -20,5 +20,8 @@ export default {
   clearMessages({ commit }) {
     commit('clearMessages')
   },
+  updateMobileUserList({ commit }, payload) {
+    commit('updateMobileUserList', payload)
+  },
 
 }
