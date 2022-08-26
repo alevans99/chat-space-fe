@@ -1,7 +1,12 @@
 <template>
   <v-container class="fill-height pa-0" fluid>
     <v-row class="" style="height: 100%">
-      <v-col cols="0" md="3" class="d-none d-md-block py-0">
+      <v-col
+        cols="0"
+        md="3"
+        class="d-none d-md-block py-0"
+        style="height: 100vh"
+      >
         <UserList />
       </v-col>
 

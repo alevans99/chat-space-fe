@@ -4,6 +4,6 @@ export default {
   room: null,
   clientId: null,
   messages: [],
-  currentUsers: [],
+  currentUsers: [{ username: 'Example', clientId: 1 }, { username: 'Example', clientId: 1 }, { username: 'Example', clientId: 1 }, { username: 'Example', clientId: 1 }, { username: 'Example', clientId: 1 }, { username: 'Example', clientId: 1 }, { username: 'Example', clientId: 1 }, { username: 'EThis is much longerample', clientId: 1 }, { username: 'Example', clientId: 1 }, { username: 'Example', clientId: 1 }],
   mobileUserList: true,
 }

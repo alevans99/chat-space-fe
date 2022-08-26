@@ -1,23 +1,27 @@
 <template >
-  <v-container class="fill-height py-0">
-    <v-row class="fill-height">
-      <v-col class="fill-height user-list-container" cols="12">
+  <v-card color="rgba(0, 0, 0, 0.827)" style="height: 100vh">
+    <v-card-title>
+      <h4 class="text-h4 white--text text-center" style="width: 100%">
+        Users Online
+      </h4>
+    </v-card-title>
+
+    <v-card-text>
+      <div
+        cols="12"
+        class="d-flex flex-column flex-nowrap align-center pt-4"
+        style="overflow: scroll; max-height: 70vh"
+      >
         <div
-          cols="12"
-          class="d-flex flex-column flex-nowrap align-center pt-12"
+          v-for="(user, i) in currentUsers"
+          :key="`User-${user}${i}`"
+          class="user-container pb-6"
         >
-          <h2 class="text-h2 white--text py-12 text-center">Users Online</h2>
-          <div
-            v-for="(user, i) in currentUsers"
-            :key="`User-${user}${i}`"
-            class="user-container pb-6"
-          >
-            <h4 class="text-h4 white--text">{{ user.username }}</h4>
-          </div>
+          <h6 class="text-h6 white--text text-center">{{ user.username }}</h6>
         </div>
-      </v-col>
-    </v-row>
-  </v-container>
+      </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

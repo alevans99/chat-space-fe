@@ -14,7 +14,7 @@ export default {
     state.username = payload.username
   },
   setCurrentUsers(state, payload) {
-    state.currentUsers = payload.currentUsers
+    // state.currentUsers = payload.currentUsers
     const joinMessage = {
       text: `${payload.newUser.username} has joined the room.`,
       timestamp: DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
