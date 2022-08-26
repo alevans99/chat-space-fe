@@ -5,7 +5,11 @@
         <UserList />
       </v-col>
 
-      <v-col cols="12" md="9" class="d-flex flex-column px-8 pl-md-2">
+      <v-col
+        cols="12"
+        md="9"
+        class="d-flex flex-column px-4 pb-1 pb-md-4 px-md-8 pl-md-2"
+      >
         <div
           style="cursor: pointer"
           class="d-flex justify-end align-center"
@@ -13,8 +17,12 @@
           @mouseleave="copyIconColor = 'white'"
           @click="copyRoomLink"
         >
-          <h4 :class="`text-h4 ${copyIconColor}--text ma-2`">{{ room }}</h4>
-          <v-icon :color="copyIconColor" large>mdi-content-copy</v-icon>
+          <h4 :class="`text-subtitle-1 text-md-h4 ${copyIconColor}--text ma-2`">
+            {{ room }}
+          </h4>
+          <v-icon :color="copyIconColor" v-bind="iconSize"
+            >mdi-content-copy</v-icon
+          >
           <v-snackbar v-model="copySnackbar" timeout="1000" top right>
             Link Copied
           </v-snackbar>
@@ -48,6 +56,16 @@ export default {
     ...mapState(['clientId', 'username', 'room']),
     userListVisibility() {
       return !['xs', 'sm'].includes(this.$vuetify.breakpoint.name)
+    },
+    iconSize() {
+      const size = {
+        xs: '',
+        sm: '',
+        md: 'large',
+        lg: 'large',
+        xl: 'large',
+      }[this.$vuetify.breakpoint.name]
+      return size ? { [size]: true } : {}
     },
   },
   created() {

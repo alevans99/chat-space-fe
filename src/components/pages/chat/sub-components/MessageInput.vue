@@ -12,9 +12,9 @@
     ></v-textarea>
     <v-btn
       color="black"
-      class="submit-button ml-4"
-      height="100"
-      width="100"
+      class="submit-button ml-0 ml-md-4"
+      height="100px"
+      :width="buttonSize"
       @click="sendMessageToSocket"
       ><v-icon color="white">mdi-send</v-icon></v-btn
     >
@@ -32,6 +32,17 @@ export default {
   }),
   computed: {
     ...mapState(['room', 'username']),
+    buttonSize() {
+      const size = {
+        xs: '50px',
+        sm: '50px',
+        md: '100px',
+        lg: '100px',
+        xl: '100px',
+      }[this.$vuetify.breakpoint.name]
+
+      return size || '100px'
+    },
   },
   methods: {
     sendMessageToSocket() {
