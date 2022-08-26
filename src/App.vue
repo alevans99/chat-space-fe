@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main :style="mainStyle">
-      <v-container fluid class="ma-0 pa-0 fill-height">
+      <v-container fluid class="fill-height pa-0">
         <router-view></router-view>
       </v-container>
     </v-main>

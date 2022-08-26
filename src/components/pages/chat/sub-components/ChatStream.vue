@@ -1,7 +1,7 @@
 <template >
   <div
-    class="d-flex flex-column all-messages-container pa-10"
-    style="height: 96%; overflow-y: scroll; width: 80%"
+    class="d-flex flex-column all-messages-container pa-2"
+    style="height: 100%; overflow-y: scroll; width: 100%"
     ref="messagesContainer"
   >
     <component

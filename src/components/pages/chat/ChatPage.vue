@@ -1,12 +1,14 @@
 <template>
-  <v-container class="fill-height ma-0 pa-0" fluid>
-    <v-row no-gutters class="fill-height">
-      <v-col cols="3" class="pa-0 ma-0"> <UserList /> </v-col>
+  <v-container class="fill-height pa-0" fluid>
+    <v-row class="" style="height: 100%">
+      <v-col cols="0" md="3" class="d-none d-md-block py-0">
+        <UserList />
+      </v-col>
 
-      <v-col cols="9" class="pa-0 ma-0">
+      <v-col cols="12" md="9" class="d-flex flex-column px-8 pl-md-2">
         <div
-          style="height: 5vh; cursor: pointer"
-          class="d-flex justify-end align-center mx-5 pt-2"
+          style="cursor: pointer"
+          class="d-flex justify-end align-center"
           @mouseover="copyIconColor = 'yellow'"
           @mouseleave="copyIconColor = 'white'"
           @click="copyRoomLink"
@@ -18,15 +20,12 @@
           </v-snackbar>
         </div>
         <div
-          class="d-flex align-center justify-center"
-          style="width: 100%; height: 80vh"
+          class="d-flex align-center justify-center flex-grow-1"
+          style="width: 100%; height: 1vh"
         >
           <ChatStream />
         </div>
-        <div
-          class="d-flex align-center justify-center"
-          style="width: 100%; height: 14vh"
-        >
+        <div class="d-flex align-center justify-center" style="width: 100%">
           <MessageInput />
         </div>
       </v-col>
@@ -47,6 +46,9 @@ export default {
   data: () => ({ copyIconColor: 'white', copySnackbar: false }),
   computed: {
     ...mapState(['clientId', 'username', 'room']),
+    userListVisibility() {
+      return !['xs', 'sm'].includes(this.$vuetify.breakpoint.name)
+    },
   },
   created() {
     if (

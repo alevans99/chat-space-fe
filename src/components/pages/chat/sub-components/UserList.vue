@@ -1,12 +1,12 @@
 <template >
-  <v-container class="fill-height pa-0">
-    <v-row class="fill-height" no-gutters>
-      <v-col class="fill-height user-list-container pa-0" cols="12">
+  <v-container class="fill-height py-0">
+    <v-row class="fill-height">
+      <v-col class="fill-height user-list-container" cols="12">
         <div
           cols="12"
           class="d-flex flex-column flex-nowrap align-center pt-12"
         >
-          <h2 class="text-h2 white--text py-12">Users Online</h2>
+          <h2 class="text-h2 white--text py-12 text-center">Users Online</h2>
           <div
             v-for="(user, i) in currentUsers"
             :key="`User-${user}${i}`"
@@ -33,6 +33,9 @@ export default {
 </script>
 <style scoped>
 .user-list-container {
-  background-color: rgba(0, 0, 0, 0.626);
+  background-color: rgba(0, 0, 0, 0.627);
+}
+.transparent {
+  background-color: rgba(245, 245, 220, 0);
 }
 </style>

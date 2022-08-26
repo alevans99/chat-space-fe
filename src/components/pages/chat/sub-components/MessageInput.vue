@@ -1,11 +1,11 @@
 <template >
-  <div class="d-flex mx-10 align-end" style="height: 100%; width: 80%">
+  <div class="d-flex align-end" style="height: 100%; width: 100%">
     <v-textarea
       v-model="messageText"
       clearable
       no-resize
-      height="100"
       class="white message-input mt-0"
+      height="100px"
       hide-details
       outlined
       @keydown.enter.prevent="sendMessageToSocket()"
