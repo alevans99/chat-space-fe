@@ -63,4 +63,15 @@ export default {
   width: 0px;
   background: transparent;
 }
+i.v-icon.typing-animation {
+  animation: pulse 2s infinite;
+  color: chartreuse;
+}
+@keyframes pulse {
+  0% {
+  }
+  50% {
+    transform: scale(0.4);
+  }
+}
 </style>

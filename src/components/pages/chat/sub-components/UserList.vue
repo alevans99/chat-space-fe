@@ -1,6 +1,16 @@
 <template >
   <v-card color="rgba(0, 0, 0, 0.827)" style="height: 100vh">
-    <v-card-title>
+    <v-card-title class="d-flex flex-column align-center">
+      <v-btn
+        fab
+        large
+        top
+        outlined
+        color="white"
+        class="d-none d-md-block mb-4"
+        @click="leaveRoom"
+        ><v-icon color="white">mdi-arrow-left</v-icon></v-btn
+      >
       <h4 class="text-h4 white--text text-center" style="width: 100%">
         Users Online
       </h4>
@@ -35,12 +45,19 @@
 
 <script>
 import { mapState } from 'vuex'
+import router from '@/router'
+
 export default {
   name: 'user-list',
 
   data: () => ({}),
   computed: {
     ...mapState(['currentUsers']),
+  },
+  methods: {
+    leaveRoom() {
+      router.push({ name: 'menu' })
+    },
   },
 }
 </script>
@@ -50,16 +67,5 @@ export default {
 }
 .transparent {
   background-color: rgba(245, 245, 220, 0);
-}
-i.v-icon.typing-animation {
-  animation: pulse 2s infinite;
-  color: chartreuse;
-}
-@keyframes pulse {
-  0% {
-  }
-  50% {
-    transform: scale(0.4);
-  }
 }
 </style>

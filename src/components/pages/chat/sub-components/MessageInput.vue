@@ -8,7 +8,6 @@
       height="100px"
       hide-details
       outlined
-      @input="handleTyping"
       @keydown.enter.prevent="sendMessageToSocket()"
     ></v-textarea>
     <v-btn
@@ -46,6 +45,18 @@ export default {
       return size || '100px'
     },
   },
+  watch: {
+    // whenever question changes, this function will run
+    messageText(newValue) {
+      if (!newValue || newValue.length === 0) {
+        this.typing = false
+        this.$socket.emit('typing', { room: this.room, typing: false })
+      } else if (this.typing === false) {
+        this.typing = true
+        this.$socket.emit('typing', { room: this.room, typing: true })
+      }
+    },
+  },
   methods: {
     ...mapActions(['updateClientField']),
     sendMessageToSocket() {
@@ -57,16 +68,6 @@ export default {
       })
       this.messageText = ''
       this.typing = false
-      this.$socket.emit('typing', { room: this.room, typing: false })
-    },
-    handleTyping() {
-      if (this.messageText.length === 0) {
-        this.typing = false
-        this.$socket.emit('typing', { room: this.room, typing: false })
-      } else if (this.typing === false) {
-        this.typing = true
-        this.$socket.emit('typing', { room: this.room, typing: true })
-      }
     },
   },
 }

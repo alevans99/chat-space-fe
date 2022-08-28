@@ -24,17 +24,29 @@
             px-1 px-md-0
           "
         >
-          <v-btn
-            fab
-            outlined
-            color="white"
-            @click="updateMobileUserList({ mobileUserList: true })"
-            class="d-md-none"
-          >
-            <v-icon color="white" v-bind="iconSize"
-              >mdi-account-multiple</v-icon
+          <div class="d-flex flex-nowrap">
+            <v-btn
+              fab
+              top
+              left
+              outlined
+              color="white"
+              class="d-md-none mx-1"
+              @click="leaveRoom"
+              ><v-icon color="white">mdi-arrow-left</v-icon></v-btn
             >
-          </v-btn>
+            <v-btn
+              fab
+              outlined
+              color="white"
+              @click="updateMobileUserList({ mobileUserList: true })"
+              class="d-md-none mx-1"
+            >
+              <v-icon color="white" v-bind="iconSize"
+                >mdi-account-multiple</v-icon
+              >
+            </v-btn>
+          </div>
           <div
             class="d-flex justify-end"
             @mouseover="copyIconColor = 'yellow'"
@@ -42,7 +54,7 @@
             @click="copyRoomLink"
           >
             <h4
-              :class="`text-subtitle-1 text-md-h4 ${copyIconColor}--text ma-2`"
+              :class="`text-subtitle-1 text-md-h4 ${copyIconColor}--text mx-2`"
             >
               {{ room }}
             </h4>
@@ -72,7 +84,6 @@
 <script>
 import UserList from './sub-components/UserList.vue'
 import UserListDialog from './sub-components/UserListDialog.vue'
-
 import ChatStream from './sub-components/ChatStream.vue'
 import MessageInput from './sub-components/MessageInput.vue'
 import { mapActions, mapState } from 'vuex'
@@ -128,6 +139,9 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    leaveRoom() {
+      router.push({ name: 'menu' })
     },
   },
 }

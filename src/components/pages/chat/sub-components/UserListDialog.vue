@@ -22,9 +22,15 @@
           <div
             v-for="(user, i) in currentUsers"
             :key="`User-${user}${i}`"
-            class="user-container pb-6"
+            class="user-container pb-6 d-flex flex-nowrap"
           >
+            <v-icon v-show="user.typing == true" class="typing-animation"
+              >mdi-circle-medium</v-icon
+            >
             <h4 class="text-h4 white--text">{{ user.username }}</h4>
+            <v-icon v-show="user.typing == true" class="typing-animation"
+              >mdi-circle-medium</v-icon
+            >
           </div>
         </div>
       </v-card-text>
@@ -34,6 +40,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'user-list-dialog',
 
