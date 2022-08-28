@@ -23,5 +23,8 @@ export default {
   updateMobileUserList({ commit }, payload) {
     commit('updateMobileUserList', payload)
   },
+  updateClientField({ commit }, payload) {
+    commit('updateClientField', payload)
+  },
 
 }

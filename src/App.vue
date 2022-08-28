@@ -28,6 +28,9 @@ export default {
     this.$socket.on('leave-space', ({ clientId }) => {
       this.removeUserFromRoom({ clientId })
     })
+    this.$socket.on('typing', ({ clientId, typing }) => {
+      this.updateClientField({ clientId, field: 'typing', value: typing })
+    })
   },
   data: () => ({
     mainStyle: {
@@ -50,6 +53,7 @@ export default {
       'setCurrentUsers',
       'addMessage',
       'removeUserFromRoom',
+      'updateClientField',
     ]),
   },
 }

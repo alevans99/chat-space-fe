@@ -45,5 +45,13 @@ export default {
   updateMobileUserList(state, payload) {
     state.mobileUserList = payload.mobileUserList
   },
+  updateClientField(state, payload) {
+    const userIndex = state.currentUsers.findIndex((user) => {
+      return user.clientId === payload.clientId
+    })
+    if (userIndex !== -1) {
+      state.currentUsers[userIndex][payload.field] = payload.value
+    }
+  },
 
 }

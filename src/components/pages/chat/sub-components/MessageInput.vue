@@ -8,6 +8,7 @@
       height="100px"
       hide-details
       outlined
+      @input="handleTyping"
       @keydown.enter.prevent="sendMessageToSocket()"
     ></v-textarea>
     <v-btn
@@ -22,13 +23,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import { DateTime } from 'luxon'
 export default {
   name: 'message-input',
 
   data: () => ({
     messageText: '',
+    typing: false,
   }),
   computed: {
     ...mapState(['room', 'username']),
@@ -45,6 +47,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['updateClientField']),
     sendMessageToSocket() {
       this.$socket.emit('message', {
         text: this.messageText,
@@ -53,6 +56,17 @@ export default {
         timestamp: DateTime.now().toISO(),
       })
       this.messageText = ''
+      this.typing = false
+      this.$socket.emit('typing', { room: this.room, typing: false })
+    },
+    handleTyping() {
+      if (this.messageText.length === 0) {
+        this.typing = false
+        this.$socket.emit('typing', { room: this.room, typing: false })
+      } else if (this.typing === false) {
+        this.typing = true
+        this.$socket.emit('typing', { room: this.room, typing: true })
+      }
     },
   },
 }

@@ -15,9 +15,18 @@
         <div
           v-for="(user, i) in currentUsers"
           :key="`User-${user}${i}`"
-          class="user-container pb-6"
+          class="user-container pb-6 d-flex flex-nowrap"
         >
-          <h6 class="text-h6 white--text text-center">{{ user.username }}</h6>
+          <v-icon v-show="user.typing == true" class="typing-animation"
+            >mdi-circle-medium</v-icon
+          >
+          <h6 class="text-h6 white--text text-center mx-2">
+            {{ user.username }}
+          </h6>
+
+          <v-icon v-show="user.typing == true" class="typing-animation"
+            >mdi-circle-medium</v-icon
+          >
         </div>
       </div>
     </v-card-text>
@@ -41,5 +50,16 @@ export default {
 }
 .transparent {
   background-color: rgba(245, 245, 220, 0);
+}
+i.v-icon.typing-animation {
+  animation: pulse 2s infinite;
+  color: chartreuse;
+}
+@keyframes pulse {
+  0% {
+  }
+  50% {
+    transform: scale(0.4);
+  }
 }
 </style>
