@@ -13,14 +13,15 @@
         "
       >
         <v-text-field
-          label="Your Name"
+          label="Choose a name to display"
           class="white menu-item font-weight-light pa-0 ma-4 ma-md-6 ma-lg-10"
-          placeholder="Choose a name to display"
+          placeholder="Type up to 20 characters"
           single-line
           rounded
           hide-details="auto"
           :height="menuItemHeight"
           v-model="usernameInput"
+          maxlength="20"
         ></v-text-field>
       </div>
       <v-scroll-y-reverse-transition hide-on-leave>

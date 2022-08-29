@@ -33,7 +33,9 @@
               color="white"
               class="d-md-none mx-1"
               @click="leaveRoom"
-              ><v-icon color="white">mdi-arrow-left</v-icon></v-btn
+              ><v-icon v-bind="iconSize" color="white"
+                >mdi-arrow-left</v-icon
+              ></v-btn
             >
             <v-btn
               fab
