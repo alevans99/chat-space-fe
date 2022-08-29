@@ -53,5 +53,11 @@ export default {
       state.currentUsers[userIndex][payload.field] = payload.value
     }
   },
+  updateErrorDialog(state, payload) {
+    state.errorDialog = payload.errorDialog
+  },
+  updateErrorDialogText(state, payload) {
+    state.errorDialogText = payload.errorDialogText
+  },
 
 }

@@ -3,6 +3,7 @@
     <v-main :style="mainStyle">
       <v-container fluid class="fill-height pa-0">
         <router-view></router-view>
+        <ErrorDialog />
       </v-container>
     </v-main>
   </v-app>
@@ -10,11 +11,12 @@
 
 <script>
 import backgroundImage from './assets/background-image.jpg'
+import ErrorDialog from './components/ErrorDialog.vue'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'App',
 
-  components: {},
+  components: { ErrorDialog },
   created() {
     this.$socket.on('connected', (client) => {
       this.setSocketConnected({ socketConnected: true, id: this.$socket.id })

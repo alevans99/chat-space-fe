@@ -6,4 +6,6 @@ export default {
   messages: [],
   currentUsers: [],
   mobileUserList: false,
+  errorDialog: false,
+  errorDialogText: 'There was an unexpected error.',
 }

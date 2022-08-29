@@ -175,18 +175,44 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['updateRoom', 'updateUsername']),
+    ...mapActions([
+      'updateRoom',
+      'updateUsername',
+      'updateErrorDialogText',
+      'updateErrorDialog',
+    ]),
     async handleCreateRoom() {
-      const room = await createNewRoom(this.username, this.clientId)
-      this.updateRoom({ room })
-      router.push({ name: 'chat', params: { room } })
-    },
-    async handleJoinExistingRoom() {
-      const room = this.spaceNameInput
-      const roomStatus = await checkRoomStatus(room)
-      if (roomStatus) {
+      try {
+        const room = await createNewRoom(this.username, this.clientId)
         this.updateRoom({ room })
         router.push({ name: 'chat', params: { room } })
+      } catch (error) {
+        this.updateErrorDialogText({
+          errorDialogText:
+            'There was an error while trying to create this room.',
+        })
+        this.updateErrorDialog({ errorDialog: true })
+      }
+    },
+    async handleJoinExistingRoom() {
+      try {
+        const room = this.spaceNameInput
+        const roomStatus = await checkRoomStatus(room)
+        if (roomStatus) {
+          this.updateRoom({ room })
+          router.push({ name: 'chat', params: { room } })
+        } else {
+          this.updateErrorDialogText({
+            errorDialogText: 'This room does not exist.',
+          })
+          this.updateErrorDialog({ errorDialog: true })
+        }
+      } catch (error) {
+        this.updateErrorDialogText({
+          errorDialogText:
+            'There was an error while trying to connect to this room.',
+        })
+        this.updateErrorDialog({ errorDialog: true })
       }
     },
   },

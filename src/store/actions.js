@@ -26,5 +26,10 @@ export default {
   updateClientField({ commit }, payload) {
     commit('updateClientField', payload)
   },
-
+  updateErrorDialog({ commit }, payload) {
+    commit('updateErrorDialog', payload)
+  },
+  updateErrorDialogText({ commit }, payload) {
+    commit('updateErrorDialogText', payload)
+  },
 }
