@@ -6,7 +6,7 @@ node_modules
 # local env files
 .env.local
 .env.*.local
-
+.env
 # Log files
 npm-debug.log*
 yarn-debug.log*
@@ -22,3 +22,5 @@ pnpm-debug.log*
 *.sln
 *.sw?
 scratch.js
+/.netlify
+public/_redirects
