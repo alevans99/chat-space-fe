@@ -133,13 +133,21 @@ export default {
     this.clearMessages()
   },
   methods: {
-    ...mapActions(['clearMessages', 'updateMobileUserList']),
+    ...mapActions([
+      'clearMessages',
+      'updateMobileUserList',
+      'updateErrorDialogText',
+      'updateErrorDialog',
+    ]),
     async copyRoomLink() {
       try {
         await navigator.clipboard.writeText(this.room)
         this.copySnackbar = true
       } catch (error) {
-        console.log(error)
+        this.updateErrorDialogText({
+          errorDialogText: 'There was an error trying to copy the room code',
+        })
+        this.updateErrorDialog({ errorDialog: true })
       }
     },
     leaveRoom() {

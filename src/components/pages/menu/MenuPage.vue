@@ -187,9 +187,15 @@ export default {
         this.updateRoom({ room })
         router.push({ name: 'chat', params: { room } })
       } catch (error) {
+        let errorDialogText =
+          'There was an error while trying to create this room.'
+        const response = error.response
+        if (response !== undefined && response.status === 503) {
+          errorDialogText =
+            'There are no Chat Spaces available at the moment! Please try later.'
+        }
         this.updateErrorDialogText({
-          errorDialogText:
-            'There was an error while trying to create this room.',
+          errorDialogText,
         })
         this.updateErrorDialog({ errorDialog: true })
       }
