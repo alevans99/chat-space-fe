@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height pa-0" fluid>
-    <v-row class="ma-0 ma-sm-n3" style="height: 100%">
+    <v-row class="ma-0 ma-md-n3" style="height: 100%">
       <v-col
         cols="0"
         md="3"

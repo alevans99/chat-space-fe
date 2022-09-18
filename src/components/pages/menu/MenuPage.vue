@@ -1,7 +1,11 @@
 <template>
-  <v-container>
-    <h1 class="menu-title white--text ma-10">Find Your Chat Space</h1>
-    <div id="menu-container">
+  <v-container
+    fluid
+    style="height: 90%"
+    class="d-flex flex-column align-center"
+  >
+    <h1 class="menu-title white--text ma-6">Find Your Chat Space</h1>
+    <div id="menu-container" class="d-flex flex-column align-center">
       <div
         class="
           menu-items-container
@@ -227,18 +231,19 @@ export default {
 <style scoped>
 #menu-container {
   z-index: 2 !important;
+  width: 50%;
 }
 :deep(.menu-title) {
   font-family: 'ABeeZee', sans-serif;
-  font-size: 8vw;
+  font-size: 8rem;
   text-align: center;
   line-height: 1;
 }
 
 .menu-item {
-  width: 500px;
   text-transform: unset !important;
   font-size: 1.6rem;
+  width: 500px;
 }
 :deep(label) {
   font-size: 1.6rem !important;
@@ -258,9 +263,6 @@ export default {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   text-align: center;
-}
-
-:deep(.v-input__slot) {
 }
 
 .menu-button {
@@ -283,11 +285,11 @@ export default {
 
 @media only screen and (max-width: 1080px) {
   :deep(.menu-title) {
-    font-size: 8vw;
+    font-size: 5rem;
   }
   .menu-item {
-    width: 400px;
     font-size: 1.2rem;
+    width: 400px;
   }
 
   :deep(label),
@@ -298,25 +300,53 @@ export default {
 
 @media only screen and (max-width: 800px) {
   :deep(.menu-title) {
-    font-size: 8vw;
+    font-size: 3rem;
   }
   .menu-item {
-    width: 320px;
     font-size: 1.1rem;
+    width: 350px;
   }
   :deep(label),
   :deep(input) {
     font-size: 1.1rem !important;
   }
 }
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-height: 800px) {
   :deep(.menu-title) {
-    font-size: 14vw;
+    font-size: 3rem;
   }
   .menu-item {
-    width: 300px;
+    font-size: 1.1rem;
+    width: 350px;
+  }
+  :deep(label),
+  :deep(input) {
+    font-size: 1.1rem !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  :deep(.menu-title) {
+    font-size: 2rem;
+  }
+  .menu-item {
     font-size: 1rem;
+    width: 300px;
+  }
+  :deep(label),
+  :deep(input) {
+    font-size: 1rem !important;
+  }
+  .attribution {
+    font-size: 0.6rem;
+  }
+}
+@media only screen and (max-height: 600px) {
+  :deep(.menu-title) {
+    font-size: 2rem;
+  }
+  .menu-item {
+    font-size: 1rem;
+    width: 300px;
   }
   :deep(label),
   :deep(input) {
