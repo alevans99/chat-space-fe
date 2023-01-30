@@ -1,24 +1,13 @@
-# chat-space-fe
+<img src="src/assets/chat-space-image.png" style="width: 400px; border-radius: 4px;"></img><br>
 
-## Project setup
-```
-npm install
-```
+## Project Overview
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+'Chat Space' is an instant messaging app with the ability to create and share dynamically created rooms.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Visit the deployed site here:
+[https://chat-space-ae.netlify.app/](https://chat-space-ae.netlify.app/)
 
-### Lints and fixes files
-```
-npm run lint
-```
+The site is built using Vue.js, and uses Socket.io to manage user connections.
+<br><br>
+<img src="src/assets/chat-space-preview-01.png" style="width: 400px; border-radius: 4px;"></img>       <img src="src/assets/chat-space-preview-02.png" style="width: 400px; border-radius: 4px;"></img>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
